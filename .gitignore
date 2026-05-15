@@ -1,0 +1,18 @@
+# Eclipse / STS
+.metadata/
+.classpath
+.project
+.settings/
+
+# Tomcat
+Servers/
+
+# Build
+target/
+bin/
+
+# Java
+*.class
+
+# Logs
+*.log

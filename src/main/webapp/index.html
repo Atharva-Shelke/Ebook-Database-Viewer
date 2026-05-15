@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="ISO-8859-1">
+	<title>Ebook Database Viewer</title>
+	<style>
+		body {
+			margin: 0;
+			height: 100vh;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			font-family: Arial, sans-serif;
+			background: #f4f6f9;
+		}
+
+		.container {
+			text-align: center;
+			background: white;
+			padding: 40px;
+			border-radius: 12px;
+			box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+		}
+
+		h1 {
+			margin-bottom: 10px;
+			color: #333;
+		}
+
+		p {
+			color: #666;
+			margin-bottom: 30px;
+		}
+
+		button {
+			background: #0078ff;
+			color: white;
+			border: none;
+			padding: 15px 30px;
+			font-size: 18px;
+			border-radius: 8px;
+			cursor: pointer;
+			transition: 0.3s;
+		}
+
+		button:hover {
+			background: #005ecb;
+		}
+	</style>
+</head>
+
+<body>
+	<div class="container">
+		<h1>Ebook Database Viewer</h1>
+		<p>View all ebook records stored in the embedded H2 database</p>
+		<form action="EbookServlet" method="GET">
+			<button type="submit">Show Database</button>
+		</form>
+	</div>
+</body>
+
+</html>

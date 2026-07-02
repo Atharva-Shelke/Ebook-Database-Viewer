@@ -6,6 +6,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -34,22 +35,23 @@ public class EbookServlet extends HttpServlet {
 
 			Statement st = con.createStatement();
 
+			Map<String, String> queries = SqlLoader.loadQueries("sql/ebook.sql");
+
 			// Create table
-			st.execute("CREATE TABLE IF NOT EXISTS ebook (" + "id INT PRIMARY KEY, " + "title VARCHAR(100), "
-					+ "author VARCHAR(100), " + "price INT, " + "quantity INT)");
+			st.execute(queries.get("create_ebook_table"));
 
 			// Insert sample data
-			st.execute("MERGE INTO ebook KEY(id) VALUES" + "(1, 'Java Basics', 'James Gosling', 500, 10),"
-					+ "(2, 'Spring Boot', 'Craig Walls', 700, 5)");
+			st.execute(queries.get("insert_ebook_records"));
 
 			// Query data
-			ResultSet rs = st.executeQuery("SELECT * FROM ebook");
+			ResultSet rs = st.executeQuery(queries.get("find_all_ebooks"));
 
 			// HTML output
 			out.print("<html><head>");
 			out.print("<style>");
 			out.print("body{font-family:Arial;background:#f4f6f9;padding:40px;text-align:center;}");
-			out.print("table{margin:auto;border-collapse:collapse;width:80%;background:white;box-shadow:0 4px 10px rgba(0,0,0,0.1);}");
+			out.print(
+					"table{margin:auto;border-collapse:collapse;width:80%;background:white;box-shadow:0 4px 10px rgba(0,0,0,0.1);}");
 			out.print("th,td{padding:14px;border:1px solid #ddd;}");
 			out.print("th{background:#0078ff;color:white;}");
 			out.print("tr:nth-child(even){background:#f2f2f2;}");

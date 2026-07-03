@@ -8,6 +8,7 @@
 Servers/
 
 # Build
+build/
 target/
 bin/
 

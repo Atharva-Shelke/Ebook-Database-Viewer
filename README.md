@@ -6,7 +6,7 @@
 ![Database](https://img.shields.io/badge/Database-H2-darkblue)
 ![Server](https://img.shields.io/badge/Server-Tomcat%209-yellow)
 
-A simple Java Servlet-based web application that demonstrates database connectivity using **pure JDBC** with an embedded **H2 Database**.
+A Java Servlet-based web application demonstrating **pure JDBC** database connectivity with an embedded **H2 Database**.
 
 The application retrieves ebook records from the database and dynamically displays them in a styled HTML table using Java Servlets.
 
@@ -18,6 +18,8 @@ The application retrieves ebook records from the database and dynamically displa
 - JDBC database connectivity
 - Dynamic HTML table generation
 - Embedded H2 database integration
+- Externalized SQL queries loaded from SQL script
+- Separation of SQL and application logic
 - Apache Tomcat deployment
 - Styled frontend using HTML & CSS
 - Legacy MySQL JDBC implementation preserved for reference
@@ -41,23 +43,33 @@ The application retrieves ebook records from the database and dynamically displa
 ## 🗂️ Project Structure
 
 ```text
-Experiment
-├── connector
-│   ├── mysql-connector.jar
-│   └── protobuf-java.jar
+Ebook
+├── src
+│   └── main
+│       ├── java
+│       │   └── com/demo
+│       │       ├── EbookServlet.java
+│       │       ├── SqlLoader.java
+│       │       └── DemoMySQLReference.java
+│       │
+│       ├── resources
+│       │   └── sql
+│       │       └── ebook.sql
+│       │
+│       └── webapp
+│           ├── index.html
+│           └── WEB-INF
+│               ├── web.xml
+│               └── lib
+│                   ├── h2.jar
+│                   ├── mysql-connector.jar
+│                   └── protobuf-java.jar
 │
-└── Ebook
-    ├── src
-    │   └── com/demo
-    │       ├── EbookServlet.java
-    │       └── DemoMySQLReference.java
-    │
-    ├── WebContent
-    │   ├── index.html
-    │   └── WEB-INF
-    │       ├── web.xml
-    │       └── lib
-    │           └── h2.jar
+├── screenshots
+│   ├── home.png
+│   └── table.png
+│
+└── README.md
 ```
 
 ---
@@ -68,7 +80,7 @@ Experiment
 
 This project currently uses an embedded **H2 Database** for easier execution and portability.
 
-Database setup and sample data creation are handled directly inside the servlet using JDBC.
+Database schema creation, sample data insertion, and query definitions are maintained in an external `ebook.sql` script. The application loads these named SQL statements at runtime using a custom SQL loader.
 
 ---
 
@@ -176,6 +188,30 @@ The application displays ebook records in a styled HTML table containing:
 
 ---
 
+## 📂 SQL Organization
+
+SQL statements are maintained in a dedicated script:
+
+```text
+src/main/resources/sql/ebook.sql
+```
+
+Each query is identified using named query comments:
+
+```sql
+-- name: create_ebook_table
+```
+```sql
+-- name: insert_ebook_records
+```
+```sql
+-- name: find_all_ebooks
+```
+
+The application loads these queries dynamically at runtime, demonstrating a clean separation between SQL and Java application logic.
+
+---
+
 ## 📖 Learning Objectives
 
 This project demonstrates:
@@ -184,6 +220,7 @@ This project demonstrates:
 * JDBC database operations
 * Dynamic HTML generation using Java
 * Database connectivity in Java web applications
+* Externalizing SQL into reusable SQL scripts
 * Working with embedded databases
 * Deploying Java web applications on Apache Tomcat
 

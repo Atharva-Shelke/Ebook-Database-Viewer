@@ -1,0 +1,28 @@
+# Auto detect text files and normalize line endings
+* text=auto
+
+# Java source files
+*.java text
+
+# HTML, CSS and XML
+*.html text
+*.css text
+*.xml text
+
+# SQL scripts
+*.sql text
+
+# Markdown
+*.md text
+
+# Images
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+
+# JAR files
+*.jar binary
+
+# Detect SQL
+src/main/resources/sql/*.sql linguist-language=SQL linguist-detectable=true
